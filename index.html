@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>For You!❣️</title>
+
+    <style>
+        body{
+            font-family: Arial, Helvetica, sans-serif;
+            background-color: #ffe6f1;
+            /* background-image: ; */
+            background-size: contain;
+            background-position: center;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            color: #333;
+        }
+        .container{
+            background: #fdfdfdd6;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgb(0, 0, 0, 0.2);
+            text-align: center;
+            width: 400px;
+            overflow: hidden;
+        }
+        h1{
+            font-size: 24px;
+            margin-bottom: 20px;
+            color: #e63946;
+        }
+        p{
+            font-size: 30px;
+        }
+        input[type="text"]{
+            text-align: center;
+            width: 80%;
+            padding: 10px;
+            font-size: 16px;
+            border: 2px solid #e63946;
+            border-radius: 20px;
+            margin-bottom: 20px;
+            box-sizing: border-box;
+            outline: none;
+        }
+        button{
+            width: 85%;
+            padding: 10px;
+            font-size: 16px;
+            background-color: #e63946;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        button:hover{
+            background-color: #d62828;
+        }
+        .alert{
+            margin-top: 20px;
+            padding: 10px;
+            border-radius: 5px;
+            display: none;
+            width: 100%;
+            text-align: left;
+            font-size: 16px;
+            line-height: 1.6;
+            white-space: pre-wrap;
+        }
+        .heart {
+            position: fixed;
+            top: -50px;
+            font-size: 30px;
+            color: #ff4d6d;
+            animation: fall linear infinite;
+            z-index: 0;
+        }
+
+        @keyframes fall {
+        to {
+            transform: translateY(100vh) rotate(360deg);
+            opacity: 0;
+        }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Please Enter Your Name</h1>
+        <p>😉</p>
+
+        <input type="text" name="" id="username" placeholder="Your Name here...">
+        <button onclick="greetUser()">Submit 🎁</button>
+        <div id="greetingMessage" class="alert"></div>
+    </div>
+
+    <audio id="bgMusic" loop hidden>
+    <source src="Lightning_-_Henry_Gallagher__Lyrics____NML_Piece(256k).mp3" type="audio/mp3" />
+  </audio>
+
+    <script>
+        function typeWriter(element, text, speed, callback, append = false) {
+        let i = 0;
+        if (!append) element.innerHTML = '';
+        function type() {
+            if (i < text.length) {
+                element.innerHTML += text.charAt(i);
+                i++;
+                setTimeout(type, speed);
+            } else if (callback) {
+                callback();
+            }
+        }
+        type();
+    }
+
+        function greetUser() {
+            let username = document.getElementById('username').value.trim();
+
+            let greetingMessage = document.getElementById('greetingMessage');
+            greetingMessage.style.display = 'block';
+            greetingMessage.style.backgroundColor = '#f8d7da';
+            let music = document.getElementById('bgMusic');
+
+            let introText = `Hello, ${username}! 😊\n\n`;
+            let additionalText = `Alam mo ba, araw-araw kitang nakikita sa school, at kahit simpleng sulyap lang o ngiti mo 😊, parang biglang nawawala lahat ng stress ko 😌. Hindi ko alam kung napapansin mo, pero tuwing dadaan ka, parang bumabagal ang oras ⏳ at tumitigil ang paligid 🌍, kasi ikaw lang talaga ang nakikita ko.
+
+            Kahit maliit ka lang sa height 😅, sobrang laki ng epekto mo sa puso ko ❤️ — tipong kahit di tayo magkausap, sapat na 'yung presensya mo para mapasaya ako buong araw 🌞. Hindi ko lang to basta crush... kasi parang unti-unti, nahuhulog na talaga ako sa’yo 🥹💘.
+
+            Tapos ewan ko ba, tuwing magka-chat tayo sa Messenger o sa Instagram, iba eh. Parang kahit simpleng “haha” mo o ‘yung random replies mo, may kilig na agad akong nararamdaman. Ang babaw ko nga minsan, pero hindi ko rin naman kasi kayang itago. Kahit 'di gano'n kahaba ‘yung usapan natin, sobra na akong masaya.
+
+            May mga araw pa nga na inuulit-ulit ko basahin ‘yung chat natin, kahit paulit-ulit lang ‘yung emojis or "seen" mo 😅. Kasi kahit papaano, at least may connection tayo kahit sandali lang.
+
+            Ayoko naman biglain o guluhin ka. Ayokong maging pabigat o weird sa paningin mo. Pero gusto ko lang malaman mo... na araw-araw, ikaw ‘yung inspirasyon ko. At habang tumatagal, mas lalo akong nahuhulog, hindi lang sa ganda mo, kundi sa kung paano ka makitungo, ngumiti, tumawa, o kahit sa simpleng “hi” mo lang.
+
+            Hindi ko alam kung may mapapala ‘to o kung mapapansin mo pa ‘to, pero kung sakaling mabasa mo ‘to at mapangiti ka man lang kahit konti... sapat na ‘yon sa’kin 😊💗`;
+
+
+            if (username !== "") {
+            music.play().catch(err => console.log("Music playback error:", err));
+            typeWriter(greetingMessage, introText, 50, function () {
+                setTimeout(function () {
+                    typeWriter(greetingMessage, "\n\n" + additionalText, 35, null, true);
+                }, 700);
+            });
+            } else {
+                greetingMessage.style.backgroundColor = '#ffc2c2';
+                greetingMessage.textContent = 'Please enter your name..';
+            }
+        }
+
+        setInterval(() => {
+      const heart = document.createElement('div');
+      heart.classList.add('heart');
+      heart.textContent = '💖';
+      heart.style.left = Math.random() * 100 + 'vw';
+      heart.style.animationDuration = 2 + Math.random() * 3 + 's';
+      document.body.appendChild(heart);
+      setTimeout(() => {
+        heart.remove();
+      }, 5000);
+    }, 300);
+    </script>
+</body>
+</html>
